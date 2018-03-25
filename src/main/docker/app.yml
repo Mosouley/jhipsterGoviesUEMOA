@@ -1,0 +1,19 @@
+version: '2'
+services:
+    jhipstergoviesuemoa-app:
+        image: jhipstergoviesuemoa
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://jhipstergoviesuemoa-mysql:3306/jhipstergoviesuemoa?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=jhipstergoviesuemoa-elasticsearch:9300
+        ports:
+            - 8383:8383
+    jhipstergoviesuemoa-mysql:
+        extends:
+            file: mysql.yml
+            service: jhipstergoviesuemoa-mysql
+    jhipstergoviesuemoa-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: jhipstergoviesuemoa-elasticsearch
